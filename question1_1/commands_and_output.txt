@@ -1,1 +1,27 @@
+$ whoami
+yashwanth
 
+$ id
+uid=1000(yashwanth) gid=1000(yashwanth) groups=1000(yashwanth),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users)
+
+$ echo $SHELL
+/bin/bash
+
+$ pwd
+/home/yashwanth/Linux-Lab-Assignment/Q1-Environment-Verification
+
+$ ls -la
+total 8
+drwxr-xr-x 2 yashwanth yashwanth 4096 Jul  2 06:24 .
+drwxr-xr-x 7 yashwanth yashwanth 4096 Jul  2 06:24 ..
+
+$ ping -c 4 google.com
+PING google.com (142.250.143.139) 56(84) bytes of data.
+64 bytes from pt-in-f139.1e100.net (142.250.143.139): icmp_seq=1 ttl=110 time=22.9 ms
+64 bytes from pt-in-f139.1e100.net (142.250.143.139): icmp_seq=2 ttl=110 time=21.5 ms
+64 bytes from pt-in-f139.1e100.net (142.250.143.139): icmp_seq=3 ttl=110 time=18.8 ms
+64 bytes from pt-in-f139.1e100.net (142.250.143.139): icmp_seq=4 ttl=110 time=19.1 ms
+
+--- google.com ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3006ms
+rtt min/avg/max/mdev = 18.784/20.563/22.852/1.680 ms
