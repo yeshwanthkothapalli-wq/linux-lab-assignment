@@ -1,1 +1,26 @@
+=== Question 4: File Access and I/O Investigation ===
 
+1. Open Files Identified:
+Command: lsof -p $!
+Output: Process 'sleep' (PID 1217) had file descriptors 0,1,2 pointing to /dev/pts/0, plus shared library files (libc, libm, libpcre2, etc.) loaded into memory.
+Observation: The lsof command revealed all files a running process has open, including its terminal connection and shared libraries it depends on to run.
+
+2. File Descriptor Observations:
+Command: exec 3< testfile.txt / ls -l /proc/$$/fd
+Output: File descriptor 3 -> /home/yashwanth/Linux-Lab-Assignment/Q4-File-Access-IO/testfile.txt
+Observation: Beyond the standard 0 (stdin), 1 (stdout), 2 (stderr), a custom file descriptor 3 was successfully opened and linked to testfile.txt, demonstrating how Linux assigns numeric handles to open files.
+
+3. Output Redirection and Error Redirection Results:
+Command: ls /nonexistentfolder > output.txt 2> error.txt
+Output: output.txt was empty; error.txt contained "ls: cannot access '/nonexistentfolder': No such file or directory"
+Command: ls /home > combined.txt 2>&1
+Output: combined.txt contained "yashwanth"
+Observation: The '>' operator redirects standard output, '2>' redirects standard error separately, and '2>&1' merges both streams into a single file. This confirms Linux treats stdout and stderr as independent streams that can be redirected individually or combined.
+
+4. Resource Limits Observed:
+Command: ulimit -a / ulimit -n
+Output: open files (-n) = 10240, max user processes (-u) = 31047, stack size (-s) = 8192 KB
+Observation: Linux enforces per-process resource limits to prevent a single process from consuming excessive system resources, such as capping the maximum number of files it can have open simultaneously (10240 in this case).
+
+5. Explanation of How Linux Manages File I/O:
+Linux follows the "everything is a file" philosophy, where devices, pipes, and even process communication channels are represented as file descriptors. Every process starts with 3 standard descriptors (stdin=0, stdout=1, stderr=2), and additional files opened by the process get the next available descriptor number. The kernel tracks these mappings via /proc/[PID]/fd, and redirection operators (>, >>, 2>, 2>&1) allow shells to control exactly where a program's input comes from and where its output/errors are sent.
