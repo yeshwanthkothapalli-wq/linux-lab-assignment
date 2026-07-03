@@ -1,1 +1,31 @@
+Storage Health Assessment Report - Created and edited using vi editor
 
+=== Question 5: Storage Health Assessment and Documentation ===
+
+1. Available Storage Devices:
+Command: lsblk
+Output: sda (356.9M), sdb (159.4M), sdc (2G, swap), sdd (1TB, main disk)
+Observation: The system has multiple virtual disks, with sdd being the primary 1TB disk used for the root filesystem, and sdc reserved as swap space.
+
+2. Mounted File Systems:
+Command: df -hT
+Output: /dev/sdd mounted on / as ext4 filesystem, 1007G total size
+Observation: The root filesystem uses ext4, a reliable and widely-used Linux filesystem, mounted on the main 1TB virtual disk.
+
+3. Disk Usage Statistics:
+Command: df -h
+Output: /dev/sdd - Size: 1007G, Used: 1.6G, Available: 955G, Use%: 1%
+Observation: Disk usage is extremely low at only 1%, indicating the system has abundant free storage space for a new application server deployment.
+
+4. Inode Utilization:
+Command: df -i
+Output: /dev/sdd - Total Inodes: 67108864, Used: 45130, Free: 67063734, Use%: 1%
+Observation: Inode usage is also very low at 1%, meaning the filesystem can accommodate a very large number of additional files before running out of inodes.
+
+5. Storage Health Observations:
+Both disk space and inode utilization are at healthy 1% usage levels, indicating no immediate storage concerns. The system has 955GB of available space and over 67 million free inodes.
+
+6. Recommendations for Improving Storage Utilization:
+- Set up regular monitoring alerts (e.g., using df cron jobs) to catch usage before it reaches 80-90%.
+- Since usage is currently very low, no immediate action is needed, but periodic checks should be scheduled as the application server begins storing data.
+- Consider separating application data and logs onto dedicated partitions to prevent one growing directory from affecting overall root filesystem health.
