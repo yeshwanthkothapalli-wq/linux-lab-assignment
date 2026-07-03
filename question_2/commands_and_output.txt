@@ -1,1 +1,30 @@
+=== Question 2: Secure Project Workspace Setup ===
 
+1. Directory Structure Created:
+Command: mkdir -p ProjectWorkspace/{docs,scripts,data}
+Output: ProjectWorkspace/ containing docs/, scripts/, data/
+Observation: Created an organized workspace with separate folders for documentation, scripts, and data files.
+
+2. File Permissions Before and After Modification:
+Command: ls -l docs/plan.txt (before)
+Output: -rw-r--r-- (owner: read/write, group: read, others: read)
+
+Command: chmod 640 docs/plan.txt
+Command: chmod 750 scripts/setup.sh
+Output after:
+-rw-r----- docs/plan.txt (owner: read/write, group: read, others: none)
+-rwxr-x--- scripts/setup.sh (owner: full access, group: read/execute, others: none)
+Observation: Restricted file access so only the owner and group members can read sensitive project files, and only the owner can execute scripts fully.
+
+3. Ownership Details:
+Command: ls -l
+Output: All directories owned by yashwanth:yashwanth
+Observation: Confirms the current user (yashwanth) is the owner of all created files and folders, ensuring accountability and access control.
+
+4. Umask Value Used:
+Command: umask
+Output: 0022
+Observation: The default umask of 022 means new files get 644 permissions and new directories get 755 by default, before any manual chmod adjustments.
+
+5. Explanation of How Permissions Protect Project Data:
+By restricting group and "others" access using chmod (640 for documents, 750 for scripts), we ensure that only authorized users (owner and specific group members) can read or execute sensitive project files. This prevents unauthorized users on the system from viewing or modifying confidential project data, following the principle of least privilege.
