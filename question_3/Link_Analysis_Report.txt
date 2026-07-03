@@ -1,1 +1,24 @@
+=== Question 3: File System and Link Analysis ===
 
+1. Inode Numbers of All Files:
+Command: ls -li original.txt hardlink.txt symlink.txt
+Output: original.txt = inode 45111, hardlink.txt = inode 45111, symlink.txt = inode 45114
+Observation: The hard link shares the exact same inode number as the original file, meaning they both point to the same data on disk. The symbolic link has a completely different inode, since it only stores a path reference.
+
+2. Comparison Between Hard Link and Symbolic Link:
+Command: ln original.txt hardlink.txt / ln -s original.txt symlink.txt
+Observation: A hard link is essentially another filename pointing directly to the same inode/data on disk, and both names are equally valid references to the file. A symbolic link is a separate small file that only stores the path/name of the target file, similar to a shortcut.
+
+3. Effect of Deleting the Original File:
+Command: rm original.txt
+Output: cat hardlink.txt -> "This is the original file" (still works)
+Output: cat symlink.txt -> "No such file or directory" (broken)
+Observation: Deleting the original file did not affect the hard link, since the underlying data remains on disk as long as at least one hard link references it. However, the symbolic link broke immediately since it only pointed to the now-deleted filename, not the actual data.
+
+4. Metadata Collected Using Linux Utilities:
+Command: stat original.txt
+Output: Size: 26 bytes, Inode: 45111, Links: 2, Access/Modify/Change/Birth timestamps recorded
+Observation: The stat command revealed the file had a link count of 2 before deletion (original.txt + hardlink.txt), confirming two names pointed to the same inode.
+
+5. Conclusions Drawn from the Experiment:
+Hard links are true duplicate references to the same file data, so a file's content is only truly deleted from disk once ALL hard links pointing to it are removed (link count reaches 0). Symbolic links, in contrast, are dependent on the existence of their target path and break instantly if the target is renamed, moved, or deleted. This makes hard links more resilient for redundancy but limited to the same filesystem, while symlinks are more flexible (can cross filesystems/point to directories) but fragile.
