@@ -1,29 +1,29 @@
-rafeeq@LAPTOP-BNVKV0E1:~/Linux-Lab-Assignment/Q4-File-Access-IO$ cat commands_and_output.txt
+yashwanth@LAPTOP-BNVKV0E1:~/Linux-Lab-Assignment/Q4-File-Access-IO$ cat commands_and_output.txt
 $ sleep 100 &
 [1] 1217
 
 $ lsof -p $!
 COMMAND  PID   USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME
-sleep   1217 rafeeq  cwd    DIR    8,48     4096  44947 /home/rafeeq/Linux-Lab-Assignment/Q4-File-Access-IO
-sleep   1217 rafeeq    0u   CHR  136,0      0t0      3 /dev/pts/0
-sleep   1217 rafeeq    1u   CHR  136,0      0t0      3 /dev/pts/0
-sleep   1217 rafeeq    2u   CHR  136,0      0t0      3 /dev/pts/0
+sleep   1217 yashwanth  cwd    DIR    8,48     4096  44947 /home/rafeeq/Linux-Lab-Assignment/Q4-File-Access-IO
+sleep   1217 yashwanth   0u   CHR  136,0      0t0      3 /dev/pts/0
+sleep   1217yashwanth   1u   CHR  136,0      0t0      3 /dev/pts/0
+sleep   1217 yashwanth  2u   CHR  136,0      0t0      3 /dev/pts/0
 
 $ ls -l /proc/$!/fd
-lrwx------ 1 rafeeq rafeeq 64 Jul  2 09:54 0 -> /dev/pts/0
-lrwx------ 1 rafeeq rafeeq 64 Jul  2 09:54 1 -> /dev/pts/0
-lrwx------ 1 rafeeq rafeeq 64 Jul  2 09:54 2 -> /dev/pts/0
+lrwx------ 1 yashwanth yashwanth 64 Jul  2 09:54 0 -> /dev/pts/0
+lrwx------ 1 yashwanth yashwanth 64 Jul  2 09:54 1 -> /dev/pts/0
+lrwx------ 1 yashwanth yashwanth 64 Jul  2 09:54 2 -> /dev/pts/0
 
 $ echo "test data" > testfile.txt
 
 $ exec 3< testfile.txt
 
 $ ls -l /proc/$$/fd
-lrwx------ 1 rafeeq rafeeq 64 Jul  2 09:55 0 -> /dev/pts/0
-lrwx------ 1 rafeeq rafeeq 64 Jul  2 09:55 1 -> /dev/pts/0
-lrwx------ 1 rafeeq rafeeq 64 Jul  2 09:55 2 -> /dev/pts/0
-lrwx------ 1 rafeeq rafeeq 64 Jul  2 09:55 255 -> /dev/pts/0
-lr-x------ 1 rafeeq rafeeq 64 Jul  2 09:55 3 -> /home/rafeeq/Linux-Lab-Assignment/Q4-File-Access-IO/testfile.txt
+lrwx------ 1 yashwanth yashwanth 64 Jul  2 09:55 0 -> /dev/pts/0
+lrwx------ 1 yashwanth yashwanth 64 Jul  2 09:55 1 -> /dev/pts/0
+lrwx------ 1 yashwanth yashwanth 64 Jul  2 09:55 2 -> /dev/pts/0
+lrwx------ 1 yashwanth yashwanth 64 Jul  2 09:55 255 -> /dev/pts/0
+lr-x------ 1 yashwanth yashwanth 64 Jul  2 09:55 3 -> /home/rafeeq/Linux-Lab-Assignment/Q4-File-Access-IO/testfile.txt
 
 $ ls /nonexistentfolder > output.txt 2> error.txt
 
@@ -36,7 +36,7 @@ ls: cannot access '/nonexistentfolder': No such file or directory
 $ ls /home > combined.txt 2>&1
 
 $ cat combined.txt
-rafeeq
+yashwanth
 
 $ ulimit -a
 open files                     (-n) 10240
