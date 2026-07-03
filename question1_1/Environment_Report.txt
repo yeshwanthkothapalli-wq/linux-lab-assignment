@@ -1,1 +1,26 @@
+=== Question 1: Linux Environment Verification ===
 
+1. Username and Groups:
+Command: whoami / id
+Output: yashwanth | uid=1000(yashwanth) gid=1000(yashwanth) groups=1000(yashwanth),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users)
+Observation: I am logged in as user 'yashwanth' and belong to several groups including 'sudo' (administrative privileges) and 'adm' (log access).
+
+2. Current Shell:
+Command: echo $SHELL
+Output: /bin/bash
+Observation: My default login shell is Bash, the most common Linux shell used for command execution.
+
+3. Current Working Directory:
+Command: pwd
+Output: /home/yashwanth/Linux-Lab-Assignment/Q1-Environment-Verification
+Observation: This confirms I am working inside my lab assignment folder structure.
+
+4. List of Files and Directories:
+Command: ls -la
+Output: total 8, drwxr-xr-x directories '.' and '..'
+Observation: The folder is currently empty except for the standard current (.) and parent (..) directory references, confirming a fresh workspace.
+
+5. Network Connectivity Verification:
+Command: ping -c 4 google.com
+Output: 4 packets transmitted, 4 received, 0% packet loss, rtt avg 20.563 ms
+Observation: Network connectivity is working correctly with no packet loss, confirming internet access from this Linux environment.
